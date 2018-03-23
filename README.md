@@ -21,8 +21,7 @@ utilized to connect to and query the database.
 
 To use this project, first install the below programs:
 
-### Python 3:
-Download the [latest Python version 3](https://www.python.org/downloads/), based on your operating system, and install on your machine. 
+### Python Download the [latest Python version 3](https://www.python.org/downloads/), based on your operating system, and install on your machine. 
 
 ### VirtualBox: 
 [Install the platform package](https://www.virtualbox.org/wiki/Downloads) for your operating system. You do not need the extension pack
@@ -54,7 +53,8 @@ Running the above command will connect to your installed DB server and execute t
 ### If you get the below error: 
 
 ```psql: FATAL: database "news" does not exist
-psql: could not connect to server: Connection refused```
+psql: could not connect to server: Connection refused
+```
 
 This means the DB server is not running or is not set up correctly. This can happen if you have an older version of the VM configuration. To continue, download the VM configuration again into a fresh directory and start from there.
 Pull this repo onto your computer and place the Reporting directory in the same directory as the Vagrantfile.
@@ -75,7 +75,8 @@ COUNT(*) FILTER(WHERE status LIKE '%4%') AS errors,
 COUNT(time::date) AS views
 FROM log
 GROUP BY date
-ORDER BY errors DESC;```
+ORDER BY errors DESC;
+```
 
 Run `\dv` to confirm that the new view `daily_errors` was created. `\q` to quit.
 
