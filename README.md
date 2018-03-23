@@ -1,4 +1,3 @@
-
 # Logs Analysis Reporting Tool Project
 
 This project is a reporting tool which analyzes the logs in a PostgreSQL database of a fictional newspaper site. The reporting tool 
@@ -21,7 +20,8 @@ utilized to connect to and query the database.
 
 To use this project, first install the below programs:
 
-### Python Download the [latest Python version 3](https://www.python.org/downloads/), based on your operating system, and install on your machine. 
+### Python 3:
+Download the [latest Python version 3](https://www.python.org/downloads/), based on your operating system, and install on your machine. 
 
 ### VirtualBox: 
 [Install the platform package](https://www.virtualbox.org/wiki/Downloads) for your operating system. You do not need the extension pack
