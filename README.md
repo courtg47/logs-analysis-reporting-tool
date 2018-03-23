@@ -24,7 +24,8 @@ To use this project, first install the below programs:
 Download the [latest Python version 3](https://www.python.org/downloads/), based on your operating system, and install on your machine. 
 
 
-### VirtualBox: [Install the platform package](https://www.virtualbox.org/wiki/Downloads) for your operating system. You do not need the extension pack
+### VirtualBox: 
+[Install the platform package](https://www.virtualbox.org/wiki/Downloads) for your operating system. You do not need the extension pack
 or the SDK. You also do not need to launch VirtualBox after installation.
 
 ### Vagrant:
