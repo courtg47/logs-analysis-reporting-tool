@@ -18,14 +18,13 @@ utilized to connect to and query the database.
 
 ## Installation
 
-
 To use this project, first install the below programs:
 
 ### Python 3:
 Download the [latest Python version 3](https://www.python.org/downloads/), based on your operating system, and install on your machine. 
 
-### VirtualBox: 
-[Install the platform package](https://www.virtualbox.org/wiki/Downloads) for your operating system. You do not need the extension pack
+
+### VirtualBox: [Install the platform package](https://www.virtualbox.org/wiki/Downloads) for your operating system. You do not need the extension pack
 or the SDK. You also do not need to launch VirtualBox after installation.
 
 ### Vagrant:
@@ -48,21 +47,23 @@ Now you’ll have a PostgreSQL server running in a Linux virtual machine.
 * Unzip the file after downloading. The file inside it is called `newsdata.sql`.  Put this file into the vagrant directory, 
   which is shared with the VM.
 * To load the data: `cd` into the `vagrant` directory and use the command `psql -d news -f newsdata.sql`
+* Pull this repo onto your computer and place the Reporting directory in the same directory as the Vagrantfile.
 
 Running the above command will connect to your installed DB server and execute the SQL commands in the downloaded file. 
 
 ### If you get the below error: 
 
-```psql: FATAL: database "news" does not exist
+```
+psql: FATAL: database "news" does not exist
 psql: could not connect to server: Connection refused
 ```
 
 This means the DB server is not running or is not set up correctly. This can happen if you have an older version of the VM configuration. To continue, download the VM configuration again into a fresh directory and start from there.
-Pull this repo onto your computer and place the Reporting directory in the same directory as the Vagrantfile.
+
 
 ## Create a View
 
-Before running this program successfully, you must create a view within the news database. This view will be necessary to answer 
+Before running this program successfully, you must create a view within the `news` database. This view will be necessary to answer 
 the third report question correctly. To create the view, `cd` into the `Vagrant` directory, `vagrant ssh` to login, then use the 
 following commands:
 
