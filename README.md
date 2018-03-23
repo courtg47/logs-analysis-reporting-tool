@@ -18,6 +18,7 @@ utilized to connect to and query the database.
 
 ## Installation
 
+
 To use this project, first install the below programs:
 
 ### Python 3:
@@ -69,7 +70,8 @@ following commands:
 
 `psql news`
 
-```CREATE VIEW daily_errors AS
+```
+CREATE VIEW daily_errors AS
 SELECT to_char(time::date, 'FMMonth DD, YYYY') AS date,
 COUNT(*) FILTER(WHERE status LIKE '%4%') AS errors,
 COUNT(time::date) AS views
