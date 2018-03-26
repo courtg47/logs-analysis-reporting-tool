@@ -13,7 +13,7 @@ program.
 
 ## Technologies utilized
 
-This project is written in Python 3.7 and queries a PostgreSQL database which resides on a Virtual Machine. Python DB-API is 
+This project is written in Python 3.6 and queries a PostgreSQL database which resides on a Virtual Machine. Python DB-API is 
 utilized to connect to and query the database. 
 
 ## Installation
@@ -22,7 +22,6 @@ To use this project, first install the below programs:
 
 ### Python 3:
 Download the [latest Python version 3](https://www.python.org/downloads/), based on your operating system, and install on your machine. 
-
 
 ### VirtualBox: 
 [Install the platform package](https://www.virtualbox.org/wiki/Downloads) for your operating system. You do not need the extension pack
@@ -33,9 +32,8 @@ or the SDK. You also do not need to launch VirtualBox after installation.
 [This program](https://www.vagrantup.com/downloads.html) will download a Linux operating system and run it inside the virtual machine. 
 Windows users may be asked to grant network permissions to Vagrant or make a firewall exception. Be sure to allow this.
 
-### Download the Vagrantfile [here](https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f73b_vagrantfile/vagrantfile). 
-Put this file in a new directory on your computer. Using your terminal, `cd` into that directory, then run the command `vagrant up`.  
-Let it run, this will take a few minutes.
+### Vagrantfile
+This file is included in this repo. After pulling the Reporting directory, make sure it is in the same directory as Vagrant. Then, `cd` into it and run the command `vagrant up`.  Let it run, this will take a few minutes.
  
 Now you’ll have a PostgreSQL server running in a Linux virtual machine. 
 
@@ -48,7 +46,6 @@ Now you’ll have a PostgreSQL server running in a Linux virtual machine.
 * Unzip the file after downloading. The file inside it is called `newsdata.sql`.  Put this file into the vagrant directory, 
   which is shared with the VM.
 * To load the data: `cd` into the `vagrant` directory and use the command `psql -d news -f newsdata.sql`
-* Pull this repo onto your computer and place the Reporting directory in the same directory as the Vagrantfile.
 
 Running the above command will connect to your installed DB server and execute the SQL commands in the downloaded file. 
 
@@ -72,9 +69,9 @@ following commands:
 
 `psql news`
 
-```
+```sql
 CREATE VIEW daily_errors AS
-SELECT to_char(time::date, 'FMMonth DD, YYYY') AS date,
+SELECT time::date AS date,
 COUNT(*) FILTER(WHERE status LIKE '%4%') AS errors,
 COUNT(time::date) AS views
 FROM log
@@ -89,7 +86,7 @@ Run `\dv` to confirm that the new view `daily_errors` was created. `\q` to quit.
 * `cd` into the directory containing the Vagrantfile, then run `vagrant ssh` to login to the Virtual Machine. 
 * `cd` into `/vagrant`
 * `cd` into `Reporting`
-* Run the python file reporting.py (`python reporting.py`)
+* Run the python file reporting.py (`python3 reporting.py`)
 
 You should then see the output from the report display in your terminal/command line. You have completed running the program.
 
