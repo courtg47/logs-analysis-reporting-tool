@@ -19,7 +19,8 @@ popular_articles = """SELECT articles.title, COUNT(*) AS num
                     FROM articles JOIN log
                     ON log.path = '/article/' || articles.slug
                     GROUP BY path, title
-                    ORDER BY num DESC LIMIT 3"""
+                    ORDER BY num DESC
+                    LIMIT 3"""
 
 
 """ PSQL query which finds the most popular authors """
@@ -34,8 +35,8 @@ popular_authors = """SELECT authors.name, COUNT(*) AS num
 
 """ PSQL query which displays the days
 where there were more than 1% 404 errors """
-request_errors = """SELECT date,
-                    TRUNC(
+request_errors = """SELECT to_char(date, 'FMMonth DD, YYYY'),
+                    ROUND(
                         (CAST(errors as float) /
                         CAST(views as float) * 100)::numeric,
                         1
@@ -64,20 +65,21 @@ def print_results(command, results):
     desired format, depending on the information queried.
     """
     if command == popular_articles:
-        print "What are the three most popular articles of all time? \n"
+        print("What are the three most popular articles of all time? \n")
         for row in results:
-            print "\"" + row[0] + "\"" + " -- " + str(row[1]) + " views"
+            print("\"" + row[0] + "\"" + " -- " + str(row[1]) + " views")
     elif command == popular_authors:
-        print "Who are the most popular article authors of all time? \n"
+        print("Who are the most popular article authors of all time? \n")
         for row in results:
-            print row[0] + " -- " + str(row[1]) + " views"
+            print(row[0] + " -- " + str(row[1]) + " views")
     elif command == request_errors:
-        print "On which days did more than 1% of requests lead to errors? \n"
+        print("On which days did more than 1% of requests lead to errors? \n")
         for row in results:
-            print row[0] + " -- " + str(row[1]) + "% errors"
-    print "\n"
+            print(row[0] + " -- " + str(row[1]) + "% errors")
+    print("\n")
 
 
-database_connection(popular_articles)
-database_connection(popular_authors)
-database_connection(request_errors)
+if __name__ == '__main__':
+    database_connection(popular_articles)
+    database_connection(popular_authors)
+    database_connection(request_errors)
