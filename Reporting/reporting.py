@@ -48,7 +48,7 @@ request_errors = """SELECT to_char(date, 'FMMonth DD, YYYY'),
 
 
 def database_connection(command):
-    """Connects to PostgreSQL database using Python DB-API.
+    """Connect to PostgreSQL database using Python DB-API.
 
     Parameters:
     command -- a string which contains a SQL query.
@@ -67,13 +67,9 @@ def database_connection(command):
     except psycopg2.DatabaseError as error:
         print(error)
 
-    finally:
-        if db is not None:
-            db.close()
-
 
 def print_results(command, results):
-    """Prints results from the DB to the console.
+    """Print results from the DB to the console.
 
     Parameters:
     command --  a string which contains a SQL query.
