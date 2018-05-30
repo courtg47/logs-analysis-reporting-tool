@@ -56,12 +56,20 @@ def database_connection(command):
     Returns:
     Passes results of the SQL query to the print_results function.
     """
-    db = psycopg2.connect("dbname=news")
-    c = db.cursor()
-    c.execute(command)
-    results = c.fetchall()
-    print_results(command, results)
-    db.close()
+    try:
+        db = psycopg2.connect("dbname=news")
+        c = db.cursor()
+        c.execute(command)
+        results = c.fetchall()
+        print_results(command, results)
+        db.close()
+
+    except psycopg2.DatabaseError as error:
+        print(error)
+
+    finally:
+        if db is not None:
+            db.close()
 
 
 def print_results(command, results):
