@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-import psycopg2
-
 """
 
 Logs Analysis Reporting Tool: this program will query the PSQL database
@@ -14,7 +12,9 @@ pertaining to three questions:
 
 """
 
-""" PSQL query which finds top 3 most popular articles in the DB """
+import psycopg2
+
+""" PSQL query which finds top 3 most popular articles in the DB. """
 popular_articles = """SELECT articles.title, COUNT(*) AS num
                     FROM articles JOIN log
                     ON log.path = '/article/' || articles.slug
@@ -23,7 +23,7 @@ popular_articles = """SELECT articles.title, COUNT(*) AS num
                     LIMIT 3"""
 
 
-""" PSQL query which finds the most popular authors """
+""" PSQL query which finds the most popular authors. """
 popular_authors = """SELECT authors.name, COUNT(*) AS num
                     FROM authors JOIN articles
                     ON authors.id = articles.author
@@ -34,7 +34,7 @@ popular_authors = """SELECT authors.name, COUNT(*) AS num
 
 
 """ PSQL query which displays the days
-where there were more than 1% 404 errors """
+where there were more than 1% 404 errors. """
 request_errors = """SELECT to_char(date, 'FMMonth DD, YYYY'),
                     ROUND(
                         (CAST(errors as float) /
@@ -48,8 +48,13 @@ request_errors = """SELECT to_char(date, 'FMMonth DD, YYYY'),
 
 
 def database_connection(command):
-    """Connects to PostgreSQL database using DB-API
-    and queries the DB with the above SQL.
+    """Connects to PostgreSQL database using Python DB-API.
+
+    Parameters:
+    command -- a string which contains a SQL query.
+
+    Returns:
+    Passes results of the SQL query to the print_results function.
     """
     db = psycopg2.connect("dbname=news")
     c = db.cursor()
@@ -60,22 +65,27 @@ def database_connection(command):
 
 
 def print_results(command, results):
-    """This function takes the information fetched
-    from the DB and prints to the console in the
-    desired format, depending on the information queried.
+    """Prints results from the DB to the console.
+
+    Parameters:
+    command --  a string which contains a SQL query.
+    results -- a string result returned from the DB based on the command.
+
+    Returns:
+    Results of the query to the console in the desired format as a string.
     """
     if command == popular_articles:
         print("What are the three most popular articles of all time? \n")
-        for row in results:
-            print("\"" + row[0] + "\"" + " -- " + str(row[1]) + " views")
+        for title, views in results:
+            print('"{}" -- {} views'.format(title, views))
     elif command == popular_authors:
         print("Who are the most popular article authors of all time? \n")
-        for row in results:
-            print(row[0] + " -- " + str(row[1]) + " views")
+        for title, views in results:
+            print("{} -- {} views".format(title, views))
     elif command == request_errors:
         print("On which days did more than 1% of requests lead to errors? \n")
-        for row in results:
-            print(row[0] + " -- " + str(row[1]) + "% errors")
+        for title, views in results:
+            print("{} -- {}% errors".format(title, views))
     print("\n")
 
 
